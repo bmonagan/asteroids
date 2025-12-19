@@ -10,7 +10,14 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+    
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,PLAYER_RADIUS)
+    
 
     while True:
         dt = clock.tick(60) / 1000
@@ -19,8 +26,10 @@ def main():
             if event.type == pygame.QUIT:
                 return
         pygame.Surface.fill(screen,(0,0,0))
-        player.draw(screen,"white",player.triangle(),LINE_WIDTH)
-        player.update(dt)
+        updatable.update(dt)
+        for sprite in drawable:
+            sprite.draw(screen,"white",player.triangle(),LINE_WIDTH)
+        
         pygame.display.flip()
 
 
