@@ -20,6 +20,7 @@ def main():
                 return
         pygame.Surface.fill(screen,(0,0,0))
         player.draw(screen,"white",player.triangle(),LINE_WIDTH)
+        player.update(dt)
         pygame.display.flip()
 
 
