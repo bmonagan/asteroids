@@ -12,6 +12,7 @@ class CircleShape(pygame.sprite.Sprite):
         self.position = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(0, 0)
         self.radius = radius
+        self.invincibility = False
 
     def draw(self, screen):
         # must override
@@ -23,8 +24,10 @@ class CircleShape(pygame.sprite.Sprite):
     
     def collides_with(self,other):
         distance = pygame.math.Vector2.distance_to(self.position, other.position)
-        if distance < (self.radius + other.radius):
+        if distance < (self.radius + other.radius) and not self.invincibility:
+            self.invincibility = True
             return True
+
         return False 
     def kill(self):
         pygame.sprite.Sprite.kill(self)
