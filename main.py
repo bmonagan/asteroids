@@ -6,6 +6,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from score import display_score, setup_font
 def main():
     print(f'Starting Asteroids with pygame version: {pygame.version.ver}')
     print(f'Screen width: {SCREEN_WIDTH}')
@@ -28,6 +29,9 @@ def main():
 
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,PLAYER_RADIUS)
+    score_font = setup_font(74)
+    pygame.display.set_caption("Score")
+    current_score = 0
     
 
     while True:
@@ -55,7 +59,7 @@ def main():
 
 
         screen.fill("black")
-        
+        display_score(screen, score_font, current_score, 20, 20)
         for obj in drawable:
             obj.draw(screen)
         pygame.display.flip()
